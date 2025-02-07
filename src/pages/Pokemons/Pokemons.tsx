@@ -21,9 +21,9 @@ const Pokemons = () => {
     setLoading(true);
     const allPokemons = await fetchPokemons();
     setPokemons(allPokemons)
-    // setTimeout(() => {
-    //   setLoading(false);
-    // }, 4000);
+    setTimeout(() => {
+      setLoading(false);
+    }, 4000);
   }
 
   useEffect(() => {

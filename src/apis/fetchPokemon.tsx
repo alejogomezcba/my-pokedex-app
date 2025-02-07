@@ -5,7 +5,7 @@ export const FetchPokemon = async (
     pokemonName: string,
     setIsLoading: (loading: boolean) => void
   ): Promise<PokemonDetails | null> => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
         const formattedName = FormatName(pokemonName);
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${formattedName}`);
@@ -23,10 +23,10 @@ export const FetchPokemon = async (
           name: result.name,
           id: result.id,
           imgSrc: result.sprites?.front_default || "", // Evita errores si la imagen no existe
-          stats: result.stats.reduce((acc: Record<string, number>, statObj: any) => {
+          stats: Array.isArray(result.stats) ? result.stats.reduce((acc: Record<string, number>, statObj: { stat: { name: string }; base_stat: number }) => {
               acc[statObj.stat.name] = statObj.base_stat;
               return acc;
-          }, {})
+          }, {}) : {} // Verifica que stats es un array
       };
       
     } catch (error) {
@@ -35,5 +35,4 @@ export const FetchPokemon = async (
     } finally {
       setIsLoading(false);
     }
-
 };

@@ -20,8 +20,8 @@ const LoadingComponent = () => {
   }, []);
 
   return (
-    <div className={styles.loadingContainer}>
-      <div className={styles.pepito}>
+    <div className={styles.loadingMainContainer}>
+      <div className={styles.loadingContent}>
         <img className={styles.gameboyImage} src={Pokedex} alt="Pokedex" />
         
         {/* Contenedor de ambas pantallas */}

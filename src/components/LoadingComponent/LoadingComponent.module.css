@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.loadingContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-gradient);
+  overflow: hidden; /* Evita desbordes */
+}
+
+.gameboyImage {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  position: relative;
+}
+
+.pepito{
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 📌 Contenedor General de las Pantallas */
+.screensContainer {
+  position: absolute;
+  width: 100%; /* Ajusta el tamaño de la pantalla */
+  height: 100%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+  left: 60%;
+}
+
+/* 📌 Pantalla Superior (Pikachu) */
+.screenTop {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 📌 Pantalla Inferior (Texto) */
+.screenBottom {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingText {
+  font-family: "Press Start 2P", sans-serif;
+  font-size: clamp(6px, 3vw, 20px);
+  color: #2c2c2c;
+  text-align: center;
+}
+
+.pikachuImg {
+  width: 60%;
+  max-width: 30%;
+  filter: grayscale();
+  position: absolute;
+  top: 18%;
+}
+
+@media screen and ((min-width: 700px) and (max-width: 900px)) {
+  .screensContainer {
+    left: 58%;
+  }
+}
+
+
+@media screen and ((min-width: 901px) and (max-width: 1000px)) {
+  .screensContainer {
+    left: 57%;
+  }
+}
+
+@media screen and ((min-width: 1001px) and (max-width: 1300px)) {
+  .screensContainer {
+    left: 56%;
+  }
+}
+
+@media screen and (min-width: 1301px) {
+  .screensContainer {
+    left: 54%;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .pikachuImg {
+    max-width: 200px;
+  }
+}

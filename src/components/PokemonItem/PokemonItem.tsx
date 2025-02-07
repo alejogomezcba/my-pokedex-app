@@ -2,7 +2,13 @@ import { Link } from "react-router-dom";
 
 import styles from './PokemonItem.module.css'
 
-const PokemonItem = ({ name, imgSrc, order }) => {
+interface PokemonItemProps {
+  name: string;
+  imgSrc: string;
+  order: number;
+}
+
+const PokemonItem: React.FC<PokemonItemProps> = ({ name, imgSrc, order }) => {
   
   return (
     <Link to={`/pokemons/${name.toLowerCase()}`} className={styles.pokemonItem}> 

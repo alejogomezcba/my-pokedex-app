@@ -3,6 +3,10 @@ declare module "#.module.css" {
     export default classes;
 }
 
-declare module "#.png";
-declare module "#.svg";
-declare module "#.gif";
+declare module "*.png";
+declare module "*.gif";
+declare module "*.jpg";
+declare module "*.jpeg";
+declare module "*.svg";
+declare module "*.css";
+declare module "*.module.css";

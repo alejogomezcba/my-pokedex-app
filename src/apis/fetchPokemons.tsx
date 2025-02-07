@@ -9,7 +9,7 @@ interface PokemonData {
 // Interfaz para los Pokémon procesados
 interface PokemonDetails {
     name: string;
-    id: string;
+    id: number;
     imgSrc: string;
 }
 

@@ -20,8 +20,14 @@ const Pokemon = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
+  const formattedName = name && FormatName(name.toLowerCase());
+  const imgSrc = `https://img.pokemondb.net/sprites/black-white/anim/normal/${formattedName}.gif`;
+
   useEffect(() => {
-    if (!name) return; // Evita errores si name es undefined
+    if (!name) {
+      throw new Error("Pokemon name is undefined");
+    }
+
     const fetchData = async () => {
       setIsLoading(true);
       const fetchedPokemon = await FetchPokemon(name, setIsLoading);
@@ -33,8 +39,6 @@ const Pokemon = () => {
   if (isLoading) return <LoadingComponent />;
   if (!pokemon) return <PokemonNotfound />;
 
-  const formattedName = FormatName(name.toLowerCase());
-  const imgSrc = `https://img.pokemondb.net/sprites/black-white/anim/normal/${formattedName}.gif`;
 
   return (
     <>

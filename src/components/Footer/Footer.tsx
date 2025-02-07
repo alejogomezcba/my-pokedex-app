@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import pokemonImage from '../../assets/pikachu.png';
 import itemsImage from '../../assets/pokeball.png';
@@ -7,10 +7,11 @@ import locationImage from '../../assets/pointer.png';
 import styles from './footer.module.css';
 
 const Footer = () => {
+  const navigation = useNavigate();
   return (
     <footer className={styles.footer}>
       <Link 
-        onClick={(event) => event?.preventDefault()}
+        onClick={() => navigation('pokemons')}
         to="/pokemons"
         className={styles.footerLink}
       >
@@ -18,16 +19,18 @@ const Footer = () => {
         Pokemons
       </Link>
       <Link 
-      onClick={(event) => event?.preventDefault()}
-      to="/pokemon" className={styles.footerLink}>
+      onClick={() => navigation('items')}
+      to="/items" className={styles.footerLink}>
         <img src={itemsImage} alt="Pokeball" className={styles.footerIcon}/>
         Items
       </Link>
       <Link 
-      onClick={(event) => event?.preventDefault()}
-      to="/pokemons" className={styles.footerLink}>
-        <img src={locationImage} alt="Pokeball" className={styles.footerIcon}/>
-        Map
+        onClick={(event) => event?.preventDefault()}
+        to="/"
+        className={[styles.footerLink, styles.disabledElement].join(" ")}
+      >
+          <img src={locationImage} alt="Pokeball" className={styles.footerIcon}/>
+          Map
       </Link>
     </footer>
   )

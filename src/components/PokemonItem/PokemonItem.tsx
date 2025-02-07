@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styles from './PokemonItem.module.css'
 
 const PokemonItem = ({ name, imgSrc, order }) => {
+  
   return (
     <Link to={`/pokemons/${name.toLowerCase()}`} className={styles.pokemonItem}> 
             <img src={imgSrc} alt={name} className={styles.pokemonItemIcon}/>

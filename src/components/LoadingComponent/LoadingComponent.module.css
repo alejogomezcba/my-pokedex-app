@@ -67,7 +67,6 @@
 .pikachuImg {
   width: 60%;
   max-width: 30%;
-  filter: grayscale();
   position: absolute;
   top: 18%;
 }

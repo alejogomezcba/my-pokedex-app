@@ -1,0 +1,89 @@
+.mainItems{
+  height: 100%;
+  overflow: auto;
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 150px;
+}
+
+/* Botón de regreso */
+.pokeballButton {
+    border: none;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    background: none;
+    padding: 15px 20px;
+    background: var(--bg-gradient);
+    top: 20px;
+    left: 20px;
+    width: 100%;
+  }
+  
+  .pokeballImg {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+
+  .sectionTitle {
+    margin: 20px 0;
+  }
+
+.itemsContainer{
+    margin-top: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Múltiples columnas en web */
+    gap: 16px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    padding: 5px;
+    max-width: 1400px;
+}
+
+.itemContainer {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    height: 250px;
+}
+
+.itemImg{
+    height: 100px;
+    width: auto;
+    image-rendering: pixelated;
+}
+
+.itemName{
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.itemDescription{
+    font-size: 0.8rem;
+}
+
+/* En mobile, cambiamos a lista */
+
+@media (max-width: 700px) {
+    .itemsContainer {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Múltiples columnas en web */
+    }
+  }
+
+
+@media (max-width: 500px) {
+    .itemsContainer {
+      display: flex;
+      flex-direction: column; /* Un Pokémon por fila */
+      align-items: center; /* Centrar en mobile */
+    }
+  }

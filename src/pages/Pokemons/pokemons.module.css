@@ -1,4 +1,18 @@
 .nav {
-  margin-bottom: 25px;
+  margin: 0 auto;
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Múltiples columnas en web */
+  gap: 16px;
+  padding: 16px;
+  max-width: 1400px;
+}
+
+/* En mobile, cambiamos a lista */
+@media (max-width: 768px) {
+  .pokemon-container {
+    display: flex;
+    flex-direction: column; /* Un Pokémon por fila */
+    align-items: center; /* Centrar en mobile */
+  }
 }

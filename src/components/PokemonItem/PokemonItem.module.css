@@ -4,10 +4,11 @@
     padding: 10px;
     text-decoration: none;
     align-items: center;
+    justify-content: space-evenly;
   }
   
   .pokemonItem > :first-child {
-    margin-right: 15px;
+    margin-right: 20px;
   }
   
   .pokemonItem > :last-child {
@@ -15,9 +16,10 @@
   }
   
   .pokemonItemIcon {
-    width: 2rem;
-    height: 2rem;
+    width: 5rem;
+    height: 5rem;
     object-fit: contain;
+    image-rendering: pixelated;
   }
   
   .pokemonItemText {

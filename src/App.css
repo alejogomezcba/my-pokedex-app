@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'PokeFont';
+    src: url('./assets/fonts/PokeFontSolid.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+
 *, *::after, *::before{
     box-sizing: border-box;
     margin: 0;

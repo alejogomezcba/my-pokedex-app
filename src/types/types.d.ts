@@ -8,7 +8,12 @@ export type PokemonDetails = {
     name: string;
     id: string;
     imgSrc: string;
-    hp: string;
-    attack: string;
-    defense: string; 
-}
+    stats: {
+        hp: number;
+        attack: number;
+        defense: number;
+        specialAttack: number;
+        specialDefense: number;
+        speed: number;
+    };
+};

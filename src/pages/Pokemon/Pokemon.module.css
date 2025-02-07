@@ -1,38 +1,146 @@
-.pokemon {
-    height: 85vh;
+/* Contenedor principal */
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh !important;
+  background: var(--bg-gradient);
+}
+
+/* Tarjeta principal */
+.pokemonCard {
+  background: linear-gradient(145deg, #ffcc00, #e69e00);
+  border: 5px solid #1d2b67;
+  border-radius: 20px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  height: 90%;
+}
+
+/* Botón de regreso */
+.pokeballButton {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  background: none;
+  padding: 15px 20px;
+  background: var(--bg-gradient);
+  top: 20px;
+  left: 20px;
+}
+
+.pokeballImg {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+/* Estilos del título */
+.pokemonTitle {
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.6);
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  margin-bottom: 10px;
+  width: 100%;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 50px;
+  padding: 10px 0;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Número del Pokémon */
+.pokemonOrder {
+  font-size: 20px;
+  font-weight: bold;
+  font-style: italic;
+  color: #1d2b67;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 5px 10px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+/* Imagen del Pokémon */
+.imgContainer {
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 10px;
+  height: 50%;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.pokemonInfoImg {
+  height: auto;
+  width: 100%;
+  max-width: 400px;
+  image-rendering: pixelated;
+}
+
+/* Contenedor de estadísticas */
+.statsContainer {
+  margin-top: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Múltiples columnas en web */
+  gap: 16px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  padding: 5px;
+}
+.statsText {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+.statName {
+  text-transform: capitalize;
+  font-weight: bold;
+  color: #1d2b67;
+  margin-right: 5px;
+}
+
+.statName::after {
+  content: ':';
+}
+
+.statValue {
+  text-align: right;
+  font-weight: bold;
+  color: #ff0000;
+}
+
+
+/* En mobile, cambiamos a lista */
+@media (max-width: 525px) {
+  .imgContainer {
+    height: 45%;
   }
-  
-  .pokeballButton {
-    border: none;
-    cursor: pointer;
-    outline: none;
-    display: flex;
-    align-items: center;
-    background: none;
-    padding: 50px 50px 0 50px;
+}
+
+@media (max-width: 400px) {
+  .imgContainer {
+    height: 40%;
   }
-  
-  .pokeballImg {
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
+}
+
+@media (max-width: 357px) {
+  .imgContainer {
+    height: 30%;
   }
-  
-  .pokemonInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 100px 0;
-  }
-  
-  .pokemonInfoImg {
-    width: 100px;
-    margin: 20px 0;
-  }
-  
-  .pokemonTitle {
-    margin: 20px 0;
-    font-size: 2em;
-    font-weight: bold;
-  }
-  
+}

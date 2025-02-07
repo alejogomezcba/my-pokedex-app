@@ -1,9 +1,11 @@
 .header{
-   display: grid;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 100%;
    font-size: 1.2rem;
    font-weight: bold;
    padding: 10px;
-   place-items: center;
    background: var(--bg-gradient);
 }
 
@@ -14,4 +16,5 @@
     margin: 10px;
     border: none;
     width: 80vw;
+    max-width: 600px;
 }

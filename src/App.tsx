@@ -3,6 +3,8 @@ import './App.css';
 
 import { Pokemons, Pokemon, Items } from './pages';
 
+import PokemonNotfound from './components/PokemonNotfound';
+
 function App() {
 
   return (
@@ -13,6 +15,7 @@ function App() {
           <Route path='/pokemons' element={<Pokemons />} />
           <Route path='/pokemons/:name' element={<Pokemon />} />
           <Route path='/items' element={<Items />} />
+          <Route path='*' element={<PokemonNotfound />} />
         </Routes>
       </div>
     </Router>

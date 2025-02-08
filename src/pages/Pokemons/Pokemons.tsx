@@ -41,8 +41,6 @@ const Pokemons = () => {
     return <LoadingComponent />;
   }
 
-  console.log('pokemons', pokemons);
-
   const filteredPokemons = pokemons.filter(
     (pokemon) =>
       pokemon?.imgSrc && pokemon?.name.toLowerCase().includes(query.toLowerCase())

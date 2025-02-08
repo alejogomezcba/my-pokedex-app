@@ -27,4 +27,5 @@
 
 .disabledElement  {
     filter: grayscale();
+    cursor: not-allowed;
 }

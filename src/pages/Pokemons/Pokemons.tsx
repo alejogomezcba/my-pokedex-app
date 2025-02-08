@@ -20,6 +20,7 @@ const Pokemons = () => {
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState('');
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [showToTop, setShowToTop] = useState(false); // Estado para el botón "To Top"
 
   const fetchAllPokemons = async () => {
     setLoading(true);
@@ -35,6 +36,18 @@ const Pokemons = () => {
 
   useEffect(() => {
     fetchAllPokemons();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowToTop(window.scrollY > 300); // Mostrar el botón si se baja más de 300px
+    };
+
+    console.log('entramos por aca');
+    
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   if (loading) {
@@ -56,6 +69,16 @@ const Pokemons = () => {
           ))}
         </nav>
       </main>
+
+      {showToTop && (
+        <button
+          className={styles.toTopButton}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          ↑ To Top
+        </button>
+      )}
+
       <Footer />
     </>
   );

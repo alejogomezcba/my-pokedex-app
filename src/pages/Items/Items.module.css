@@ -71,6 +71,26 @@
     font-size: 0.8rem;
 }
 
+.toTopButton {
+  position: fixed;
+  bottom: 120px;
+  right: 20px;
+  background: #ffcc00;
+  color: black;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 10%;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.toTopButton:hover {
+  background: #ff9900;
+}
+
+
 /* En mobile, cambiamos a lista */
 
 @media (max-width: 700px) {

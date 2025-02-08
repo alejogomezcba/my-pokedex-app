@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchPokemonItems } from "../../apis/fetchPokemonItems"; // Asegúrate de importar la función correctamente
+import { fetchPokemonItems } from "../../apis/fetchPokemonItems";
 import PokeballImg from '../../assets/pokeball.png';
 
 import styles from './Items.module.css';
@@ -14,6 +14,7 @@ const Items = () => {
   >([]);
 
   const [loading, setLoading] = useState(false);
+  const [showToTop, setShowToTop] = useState(false); // Estado para el botón "To Top"
 
   const navigate = useNavigate();
 
@@ -25,8 +26,17 @@ const Items = () => {
     getItems();
   }, []);
 
-  if ( loading) {
-    return <LoadingComponent/>
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowToTop(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  if (loading) {
+    return <LoadingComponent />;
   }
 
   return (
@@ -35,18 +45,16 @@ const Items = () => {
         <img src={PokeballImg} alt="Pokeball" className={styles.pokeballImg} />
         Go Back
       </button>    
+
       <div className={styles.mainContainer}>
         <h2 className={styles.sectionTitle}>Lista de Items</h2>
         <div className={styles.itemsContainer}>
           {items.length > 0 ? (
             items.map((item) => (
-              <div
-                key={item.id}
-                className={styles.itemContainer}
-              >
+              <div key={item.id} className={styles.itemContainer}>
                 <img src={item.imgSrc} alt={item.name} className={styles.itemImg} />
-                <h3 className={styles.itemName} >{item.name}</h3>
-                <p className={styles.itemDescription} >{item.description}</p>
+                <h3 className={styles.itemName}>{item.name}</h3>
+                <p className={styles.itemDescription}>{item.description}</p>
               </div>
             ))
           ) : (
@@ -54,7 +62,17 @@ const Items = () => {
           )}
         </div>
       </div>
-      <Footer/>
+
+      {showToTop && (
+        <button
+          className={styles.toTopButton}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          ↑ To Top
+        </button>
+      )}
+
+      <Footer />
     </div>
   );
 };

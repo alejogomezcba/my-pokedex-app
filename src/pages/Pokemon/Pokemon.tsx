@@ -48,8 +48,10 @@ const Pokemon = () => {
       </button>
       <main className={styles.cardContainer}>
         <div className={styles.pokemonCard}>
-          <h3 className={styles.pokemonTitle}>{pokemon.name}</h3>
-          <p className={styles.pokemonOrder}># {pokemon.id}</p>
+          <div className={styles.headerContainer}>
+            <h3 className={styles.pokemonTitle}>{pokemon.name}</h3>
+            <p className={styles.pokemonOrder}># {pokemon.id}</p>
+          </div>
           <div className={styles.imgContainer}>
             <img src={imgSrc} alt={pokemon.name} className={styles.pokemonInfoImg} />
           </div>

@@ -39,7 +39,7 @@
     margin-top: 20px;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Múltiples columnas en web */
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Múltiples columnas en web */
     gap: 16px;
     align-items: center;
     background: rgba(255, 255, 255, 0.5);
@@ -80,10 +80,24 @@
   }
 
 
-@media (max-width: 500px) {
+@media (min-width: 349px) and (max-width: 500px) {
     .itemsContainer {
-      display: flex;
-      flex-direction: column; /* Un Pokémon por fila */
-      align-items: center; /* Centrar en mobile */
+      /* display: flex;
+      flex-direction: column;
+      align-items: center;  */
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); /* Múltiples columnas en web */
     }
+}
+
+@media (max-width: 350px) {
+  .itemsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
   }
+
+  .itemContainer{
+    height: 200px;
+    width: 100%;
+  }
+}

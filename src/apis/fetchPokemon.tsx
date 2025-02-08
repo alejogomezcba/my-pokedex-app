@@ -1,38 +1,77 @@
 import { PokemonDetails } from "../types/types";
 import { FormatName } from "../utils/utils";
 
-export const FetchPokemon = async (
-    pokemonName: string,
-    setIsLoading: (loading: boolean) => void
-  ): Promise<PokemonDetails | null> => {
-    setIsLoading(true);
-    try {
-        const formattedName = FormatName(pokemonName);
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${formattedName}`);
+let pokemonMap: Record<string, number> | null = null;
 
-        if (!response.ok) {
-            console.error(`Error fetching ${formattedName}: ${response.status} - ${response.statusText}`);
-            return null; // Retorna null en lugar de lanzar un error
+// Función para cargar los datos de Pokémon si aún no están en memoria
+const getPokemonMap = async () => {
+  if (pokemonMap) return pokemonMap; // Si ya tenemos los datos, los usamos
+
+  try {
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1400");
+    const data = await response.json();
+
+    if (Array.isArray(data.results)) {
+      pokemonMap = data.results.reduce((acc, pokemon) => {
+        const idMatch = pokemon.url.match(/\/(\d+)\/$/);
+        if (idMatch) {
+          acc[pokemon.name] = parseInt(idMatch[1], 10);
         }
-
-        const result = await response.json();
-
-        console.log('datos-pokemon', result);
-        
-        return {
-          name: result.name,
-          id: result.id,
-          imgSrc: result.sprites?.front_default || "", // Evita errores si la imagen no existe
-          stats: Array.isArray(result.stats) ? result.stats.reduce((acc: Record<string, number>, statObj: { stat: { name: string }; base_stat: number }) => {
-              acc[statObj.stat.name] = statObj.base_stat;
-              return acc;
-          }, {}) : {} // Verifica que stats es un array
-      };
-      
-    } catch (error) {
-        console.error("Network or parsing error:", error);
-        return null; // Retorna null si la solicitud falla
-    } finally {
-      setIsLoading(false);
+        return acc;
+      }, {} as Record<string, number>);
     }
+  } catch (error) {
+    console.error("Error fetching all Pokémon:", error);
+    pokemonMap = {}; // Evita futuros intentos en caso de error
+  }
+
+  return pokemonMap;
+};
+
+// Función principal para obtener los detalles de un Pokémon
+export const FetchPokemon = async (
+  pokemonName: string,
+  setIsLoading: (loading: boolean) => void
+): Promise<PokemonDetails | null> => {
+  setIsLoading(true);
+
+  try {
+    const formattedName = FormatName(pokemonName);
+    const pokemonMap = await getPokemonMap(); // Obtiene el mapa con los IDs
+
+    console.log('pokemonMap', pokemonMap);
+    
+
+    if (!pokemonMap[formattedName]) {
+      console.error(`Pokemon ${formattedName} not found in the list.`);
+      return null;
+    }
+
+    const pokemonId = pokemonMap ? pokemonMap[formattedName] : '0';
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+
+    if (!response.ok) {
+      console.error(`Error fetching ${formattedName}: ${response.status} - ${response.statusText}`);
+      return null;
+    }
+
+    const result = await response.json();
+
+    return {
+      name: result.name,
+      id: result.id,
+      imgSrc: result.sprites?.front_default || "",
+      stats: Array.isArray(result.stats)
+        ? result.stats.reduce((acc: Record<string, number>, statObj: { stat: { name: string }; base_stat: number }) => {
+            acc[statObj.stat.name] = statObj.base_stat;
+            return acc;
+          }, {})
+        : {}
+    };
+  } catch (error) {
+    console.error("Network or parsing error:", error);
+    return null;
+  } finally {
+    setIsLoading(false);
+  }
 };

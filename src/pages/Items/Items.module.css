@@ -10,33 +10,11 @@
     margin-bottom: 150px;
 }
 
-/* Botón de regreso */
-.pokeballButton {
-    border: none;
-    cursor: pointer;
-    outline: none;
-    display: flex;
-    align-items: center;
-    background: none;
-    padding: 15px 20px;
-    background: var(--bg-gradient);
-    top: 20px;
-    left: 20px;
-    width: 100%;
-  }
-  
-  .pokeballImg {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-  }
-
   .sectionTitle {
     margin: 20px 0;
   }
 
 .itemsContainer{
-    margin-top: 20px;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Múltiples columnas en web */
@@ -54,6 +32,7 @@
     border-radius: 8px;
     text-align: center;
     height: 250px;
+    max-width: 200px;
 }
 
 .itemImg{

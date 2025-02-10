@@ -25,9 +25,9 @@ const Footer = () => {
         Items
       </Link>
       <Link 
-        onClick={(event) => event?.preventDefault()}
-        to="/"
-        className={[styles.footerLink, styles.disabledElement].join(" ")}
+        onClick={() => navigation('maps')}
+        to="/maps"
+        className={styles.footerLink}
       >
           <img src={locationImage} alt="Pokeball" className={styles.footerIcon}/>
           Map

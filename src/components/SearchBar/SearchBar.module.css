@@ -1,0 +1,39 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px;
+    background: var(--bg-gradient);
+ }
+ 
+ .input {
+     background-color: rgba(121,121,121,0.267);
+     padding: 10px;
+     border-radius: 5px;
+     margin: 10px;
+     border: none;
+     width: 80vw;
+     max-width: 600px;
+ }
+
+ /* Botón de regreso */
+.pokeballButton {
+    border: none;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    background: none;
+    padding: 15px 20px;
+    top: 20px;
+    left: 20px;
+  }
+  
+  .pokeballImg {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }

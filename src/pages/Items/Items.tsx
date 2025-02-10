@@ -1,27 +1,40 @@
 import { useEffect, useState } from "react";
 import { fetchPokemonItems } from "../../apis/fetchPokemonItems";
-import PokeballImg from '../../assets/pokeball.png';
-
-import styles from './Items.module.css';
+import styles from "./Items.module.css";
 
 import Footer from "../../components/Footer";
 import LoadingComponent from "../../components/LoadingComponent";
+import SearchBar from "../../components/SearchBar";
 import { useNavigate } from "react-router-dom";
 
-const Items = () => {
-  const [items, setItems] = useState<
-    { id: number; type: string; description: string; name: string; imgSrc: string }[]
-  >([]);
+// Definición de la interfaz para los items
+interface PokemonItem {
+  id: number;
+  type: string;
+  description: string;
+  name: string;
+  imgSrc: string;
+}
 
-  const [loading, setLoading] = useState(false);
-  const [showToTop, setShowToTop] = useState(false); // Estado para el botón "To Top"
+const Items = () => {
+  const [items, setItems] = useState<PokemonItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showToTop, setShowToTop] = useState<boolean>(false);
+  const [itemToSearch, setItemToSearch] = useState<string>("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const getItems = async () => {
-      const fetchedItems = await fetchPokemonItems(setLoading);
-      setItems(fetchedItems);
+      setLoading(true);
+      try {
+        const fetchedItems = await fetchPokemonItems();
+        setItems(fetchedItems);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      } finally {
+        setLoading(false);
+      }
     };
     getItems();
   }, []);
@@ -31,9 +44,14 @@ const Items = () => {
       setShowToTop(window.scrollY > 300);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Función para filtrar los items
+  const filteredItems = items.filter((item) =>
+    item.name.toLowerCase().includes(itemToSearch.toLowerCase())
+  );
 
   if (loading) {
     return <LoadingComponent />;
@@ -41,24 +59,29 @@ const Items = () => {
 
   return (
     <div className={styles.mainItems}>
-      <button onClick={() => navigate('/pokemons')} className={styles.pokeballButton}>
-        <img src={PokeballImg} alt="Pokeball" className={styles.pokeballImg} />
-        Go Back
-      </button>    
+      <SearchBar
+        itemToSearch={itemToSearch}
+        setItemToSearch={setItemToSearch}
+        navigate={navigate}
+      />
 
       <div className={styles.mainContainer}>
         <h2 className={styles.sectionTitle}>Lista de Items</h2>
         <div className={styles.itemsContainer}>
-          {items.length > 0 ? (
-            items.map((item) => (
+          {filteredItems.length > 0 ? (
+            filteredItems.map((item) => (
               <div key={item.id} className={styles.itemContainer}>
-                <img src={item.imgSrc} alt={item.name} className={styles.itemImg} />
+                <img
+                  src={item.imgSrc}
+                  alt={item.name}
+                  className={styles.itemImg}
+                />
                 <h3 className={styles.itemName}>{item.name}</h3>
                 <p className={styles.itemDescription}>{item.description}</p>
               </div>
             ))
           ) : (
-            <p>Cargando items...</p>
+            <p>No se encontraron ítems.</p>
           )}
         </div>
       </div>
@@ -66,7 +89,7 @@ const Items = () => {
       {showToTop && (
         <button
           className={styles.toTopButton}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           ↑ To Top
         </button>
